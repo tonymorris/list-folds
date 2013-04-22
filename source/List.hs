@@ -1,0 +1,1 @@
+data List t = Nil | t : List t
