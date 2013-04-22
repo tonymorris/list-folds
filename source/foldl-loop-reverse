@@ -1,0 +1,5 @@
+reverse list =
+  var r = Nil
+  foreach(e in list)
+    r = :(e, r)
+  return r

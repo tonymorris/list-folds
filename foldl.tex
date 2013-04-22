@@ -1,0 +1,128 @@
+\begin{frame}
+\frametitle{foldl}
+
+The \lstinline[basicstyle=\ttfamily]$foldl$ function is a machine that requires three values:
+\begin{enumerate}
+\item \lstinline[basicstyle=\ttfamily]$f :: b -> a -> b$
+\item \lstinline[basicstyle=\ttfamily]$z :: b$
+\item \lstinline[basicstyle=\ttfamily]$list :: List a$
+\end{enumerate}
+
+It will give you back a value of the type \lstinline[basicstyle=\ttfamily]$b$.
+
+\hrulefill
+
+\lstinline[basicstyle=\ttfamily]$foldl :: (b -> a -> b) -> b -> List a -> b$
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{foldl}
+
+\begin{block}{What does this machine do?}
+
+\begin{itemize}
+\item OK, so \lstinline[basicstyle=\ttfamily]$foldl$ takes three arguments.
+\item But what this machine do to those three arguments to compute the return value?
+\end{itemize}
+
+
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{foldl}
+
+\begin{block}{A standard loop, exactly in a way in which we are familiar}
+\lstinputlisting[label=lst:foldl-loop,basicstyle=\ttfamily]{source/foldl-loop}
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{foldl}
+\framesubtitle{example \textemdash product}
+
+\begin{block}{Really, is that all?}
+To compute the product of the list, let:
+\begin{enumerate}
+\item \lstinline[basicstyle=\ttfamily]$f = *$
+\item \lstinline[basicstyle=\ttfamily]$z = 1$
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\framesubtitle{example \textemdash product}
+
+\begin{block}{Yes, that is all}
+\lstinputlisting[label=lst:foldl-loop-product,basicstyle=\ttfamily]{source/foldl-loop-product}
+\end{block}
+
+\hrulefill
+
+\begin{lstlisting}
+product list =
+  foldl (*) 1 list
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{foldl}
+\framesubtitle{example \textemdash reverse}
+
+\begin{block}{Another examples}
+To reverse a list, let:
+\begin{enumerate}
+\item \lstinline[basicstyle=\ttfamily]$f = \\xs x -> x : xs$
+\item \lstinline[basicstyle=\ttfamily]$z = Nil$
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\framesubtitle{example \textemdash reverse}
+
+\begin{block}{Reversing a cons list}
+\lstinputlisting[label=lst:foldl-loop-reverse,basicstyle=\ttfamily]{source/foldl-loop-reverse}
+\end{block}
+
+\hrulefill
+
+\begin{lstlisting}
+reverse list =
+  foldl (\xs x -> x : xs) [] list
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\framesubtitle{observations}
+
+\begin{block}{Observations about \lstinline[basicstyle=\ttfamily]$foldl$}
+\begin{itemize}
+\item We might compute the \lstinline[basicstyle=\ttfamily]$length$ of a list with \lstinline[basicstyle=\ttfamily]$foldl$.
+\item We might compute the \lstinline[basicstyle=\ttfamily]$sum$ of a list with \lstinline[basicstyle=\ttfamily]$foldl$.
+\item Importantly, \lstinline[basicstyle=\ttfamily]$foldl$ \textbf{will never work on an infinite list}.
+\end{itemize}
+\end{block}
+
+\hrulefill
+
+There is nothing more or less to \lstinline[basicstyle=\ttfamily]$foldl$ than what has just been described.
+
+\end{frame}

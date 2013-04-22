@@ -1,0 +1,5 @@
+product list =
+  var r = 1
+  foreach(e in list)
+    r = *(r, e)
+  return r
