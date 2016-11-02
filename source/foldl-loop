@@ -1,5 +1,0 @@
-\f z list ->
-  var r = z
-  foreach(e in list)
-    r = f(r, e)
-  return r

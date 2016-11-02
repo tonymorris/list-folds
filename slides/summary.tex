@@ -1,0 +1,45 @@
+\begin{frame}
+\frametitle{Summary}
+\begin{block}{the key intuition}
+\begin{itemize}
+\item left fold performs a \emph{loop}, just like we are familiar with
+\item right fold performs \emph{constructor replacement}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{block}{from this we derive some observations}
+\begin{itemize}
+\item left fold will \emph{never} work on an infinite list
+\item right fold \emph{may} work on an infinite list
+\item right fold is the list catamorphism
+\item Everything discussed applies equally to all programming languages
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{block}{from this we also solve problems}
+\begin{itemize}
+\item \lstinline[mathescape]{product = $\ldots$}
+\item \lstinline[mathescape]{append = $\ldots$}
+\item \lstinline[mathescape]{map = $\ldots$}
+\item \lstinline[mathescape]{$\ldots$}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{block}{}
+\begin{center}
+Intuitively, that is precisely what list folds do
+
+THE END
+\end{center}
+\end{block}
+\end{frame}
+

@@ -1,0 +1,223 @@
+\begin{frame}
+\frametitle{foldl}
+The \lstinline[basicstyle=\ttfamily]$foldl$ function accepts three values:
+\begin{enumerate}
+\item \lstinline[basicstyle=\ttfamily]$f :: b -> a -> b$
+\item \lstinline[basicstyle=\ttfamily]$z :: b$
+\item \lstinline[basicstyle=\ttfamily]$list :: List a$
+\end{enumerate}
+to get back a value of the type \lstinline[basicstyle=\ttfamily]$b$.
+
+\hrulefill
+
+\lstinline[basicstyle=\ttfamily]$foldl :: (b -> a -> b) -> b -> List a -> b$
+\lstinline[basicstyle=\ttfamily]$B foldLeft<A, B>(Func<B, A, B>, B, List<A>)$
+\end{frame}
+
+\begin{frame}
+\frametitle{foldl}
+\begin{block}{?}
+\begin{center}
+How does \lstinline[basicstyle=\ttfamily]$foldl$ take three values to that return value?
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{all left folds are loops}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\f z list ->
+  var r = z
+  foreach(a in list)
+    r = f(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{all left folds are loops}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\f z list ->
+  var r = `z`
+  foreach(a in `list`)
+    r = `f`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{all left folds are loops}
+Let's sum the integers of a list
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{sum the integers of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\f z list ->
+  var r = `z`
+  foreach(a in `list`)
+    r = `f`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{sum the integers of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\list ->
+  var r = `0`
+  foreach(a in `list`)
+    r = `+`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{sum the integers of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+sum list = foldl (\r a -> (+) r a) 0 list
+sum = foldl (+) 0
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{all left folds are loops}
+Let's reverse a list
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{reverse a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\f z list ->
+  var r = `z`
+  foreach(a in `list`)
+    r = `f`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{reverse a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+flipCons r a = Cons a r
+
+\list ->
+  var r = `Nil`
+  foreach(a in `list`)
+    r = `flipCons`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{reverse a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+reverse list = foldl (\r a -> Cons a r) Nil list
+reverse = foldl (flip Cons) Nil
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{all left folds are loops}
+Let's compute the length of a list
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{length of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\f z list ->
+  var r = `z`
+  foreach(a in `list`)
+    r = `f`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{length of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+plus1 r a = r + 1
+
+\list ->
+  var r = `0`
+  foreach(a in `list`)
+    r = `plus1`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{length of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+length list = foldl (\r a -> r + 1) 0 list
+length = foldl (const . (+1)) 0
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{foldl}
+\begin{block}{refactoring, intuition}
+\begin{itemize}
+\item<1-> a left fold is what you would write if I insisted you remove all duplication from your loops
+\item<2-> all left folds are exactly this loop
+\item<3-> \textbf{exactly}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{foldl}
+\begin{block}{some observations}
+\begin{itemize}
+\item<1-> a left fold will \textbf{never} work on an infinite list
+\item<2-> a correct intuition for left folds is easy to build on existing programming knowledge (loop)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lists}
+\begin{center}
+Ensure we have developed intuition for left fold
+\end{center}
+\end{frame}

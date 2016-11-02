@@ -1,8 +1,0 @@
-Many introductions to functional programming discuss the fold functions on lists. There is fold-left and fold-right, followed by attempts to develop an intuition on how to understand, internalise, then exploit these functions as necessary. Such attempts use concepts like "folding from the right or left", but this can often lead to even more confusion, because it is not entirely accurate.
-
-In this talk, I will explain to you how list folds work using an explanation that is very easy to understand, but most importantly, without sacrificing accuracy. After I have convinced you about how to explain list folds to yourself, I will then further convince you that you should always use this explanation on others. You should then be able to deploy these functions as necessary on your own by appealing to this easy, accurate explanation.
-
-As a minimum, you will be expected to have some simple introduction to the existence of list folding. If you know these functions exist, but you are totally confused about what they mean, then this talk is for you.
-
-http://www.bfpg.org/events/96368322/
-

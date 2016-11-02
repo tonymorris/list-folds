@@ -1,0 +1,540 @@
+\begin{frame}
+\frametitle{foldl}
+The \lstinline[basicstyle=\ttfamily]$foldr$ function accepts three values:
+\begin{enumerate}
+\item \lstinline[basicstyle=\ttfamily]$f :: a -> b -> b$
+\item \lstinline[basicstyle=\ttfamily]$z :: b$
+\item \lstinline[basicstyle=\ttfamily]$list :: List a$
+\end{enumerate}
+to get back a value of the type \lstinline[basicstyle=\ttfamily]$b$.
+
+\hrulefill
+
+\lstinline[basicstyle=\ttfamily]$foldr :: (a -> b -> b) -> b -> List a -> b$
+\lstinline[basicstyle=\ttfamily]$B foldRight<A, B>(Func<A, B, B>, B, List<A>)$
+\end{frame}
+
+\begin{frame}
+\frametitle{foldl}
+\begin{block}{?}
+\begin{center}
+How does \lstinline[basicstyle=\ttfamily]$foldr$ take three values to that return value?
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{foldr}
+\begin{block}{constructor replacement}
+The \lstinline[basicstyle=\ttfamily]$foldr$ function performs \textbf{constructor replacement}.
+\end{block}
+The expression \lstinline[basicstyle=\ttfamily]$foldr f z list$ replaces in \lstinline[basicstyle=\ttfamily]$list$:
+\begin{itemize}
+\item Every occurrence of \lstinline{Cons} \lstinline[basicstyle=\ttfamily]$(:)$ with \lstinline[basicstyle=\ttfamily]$f$.
+\item Any occurrence of \lstinline{Nil} \lstinline[basicstyle=\ttfamily]$[]$ with \lstinline[basicstyle=\ttfamily]$z$\footnote{The nil constructor may be absent \textemdash an infinite list}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{foldr}
+\begin{block}{constructor replacement?}
+\small
+\begin{itemize}
+\item suppose \lstinline[basicstyle=\ttfamily]$list = Cons A (Cons B (Cons C (Cons D Nil)))$
+\item the expression \lstinline[basicstyle=\ttfamily, mathescape]!foldr f z list!
+\item produces \lstinline[basicstyle=\ttfamily]$f A (f B (f C (f D z)))$
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's multiply the integers of a list
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{multiply the integers of a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+list = Cons 4 (Cons 5 (Cons 6 (Cons 7 Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{multiply the integers of a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+list = `Cons` 4 (`Cons` 5 (`Cons` 6 (`Cons` 7 `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{multiply the integers of a list}
+\begin{itemize}
+\item let \lstinline{`Cons` = (*)}
+\item let \lstinline{`Nil`  = 1}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{multiply the integers of a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+list = `(*)` 4 (`(*)` 5 (`(*)` 6 (`(*)` 7 `1`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+product list = foldr (*) 1 list
+product = foldr (*) 1
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's and \lstinline{(&&)} the booleans of a list
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{and \lstinline{(&&)} the booleans of a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = Cons True (Cons True (Cons False (Cons True Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{and \lstinline{(&&)} the booleans of a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `Cons` True (`Cons` True (`Cons` False (`Cons` True `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{and \lstinline{(&&)} the booleans of a list}
+\begin{itemize}
+\item let \lstinline{`Cons` = (&&)}
+\item let \lstinline{`Nil`  = True}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{and \lstinline{(&&)} the booleans of a list}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `(&&)` True (`(&&)` True (`(&&)` False (`(&&)` True `True`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+conjunct list = foldr (&&) True list
+conjunct = foldr (&&) True
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's append two lists
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{append two lists}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list1 = Cons A (Cons B (Cons C (Cons D Nil)))
+list2 = Cons E (Cons F (Cons G (Cons H Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{append two lists}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list1 = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
+list2 = Cons E (Cons F (Cons G (Cons H Nil)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{append two lists}
+\begin{itemize}
+\item let \lstinline{`Cons` = Cons}
+\item let \lstinline{`Nil`  = list2}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{append two lists}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list1 = `Cons` A (`Cons` B (`Cons` C (`Cons` D `list2`)))
+list2 = Cons E (Cons F (Cons G (Cons H Nil)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+append list1 list2 = foldr Cons list2 list1
+append = flip (foldr Cons)
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's map a function on a list
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{map a function \lstinline{(f)} on a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = Cons A (Cons B (Cons C (Cons D Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{map a function \lstinline{(f)} on a list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{map a function \lstinline{(f)} on a list}
+\begin{itemize}
+\item let \lstinline{`Cons` = \x -> Cons (f x)}
+\item let \lstinline{`Nil`  = Nil}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{map a function \lstinline{(f)} on a list}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+consf x = Cons (f x)
+
+list = `consf` A (`consf` B (`consf` C (`consf` D `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+map f list = foldr (\x -> Cons (f x)) Nil list
+map f = foldr (Cons . f) Nil
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's append a list of lists
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{flatten a list of lists}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = Cons lista (Cons listb (Cons listc (Cons listd Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{flatten a list of lists}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `Cons` lista (`Cons` listb (`Cons` listc (`Cons` listd `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{flatten a list of lists}
+\begin{itemize}
+\item let \lstinline{`Cons` = append}
+\item let \lstinline{`Nil`  = Nil}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{flatten a list of lists}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `append` lista (`append` listb (`append` listc (`append` listd `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+flatten list = foldr append Nil list
+flatten = foldr append Nil
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's filter a list on predicate
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{filter a list on predicate \lstinline{(p)}}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = Cons A (Cons B (Cons C (Cons D Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{filter a list on predicate \lstinline{(p)}}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{filter a list on predicate \lstinline{(p)}}
+\begin{itemize}
+\item let \lstinline{`Cons` = \x -> if p x then Cons x else id}
+\item let \lstinline{`Nil`  = Nil}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{filter a list on predicate \lstinline{(p)}}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+applyp x = if p x then Cons x else id
+
+list = `applyp` A (`applyp` B (`applyp` C (`applyp` D `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+filter p list = foldr (\x -> if p x then Cons x else id) Nil list
+filter p = foldr (\x -> if p x then Cons x else id) Nil
+filter p = foldr (bool id (Cons x) (p x)) Nil
+filter p = foldr (bool id . Cons <*> p) Nil
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's get the head of a list, or default for no head
+
+\lstinline{:: a -> List a -> a}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{the head of a list, or default for no head}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = Cons A (Cons B (Cons C (Cons D Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{the head of a list, or default for no head}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{the head of a list, or default for no head}
+\begin{itemize}
+\item let \lstinline{`Cons` = \x _ -> x}
+\item let \lstinline{`Nil`  = thedefault}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{the head of a list, or default for no head}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+constant x _ = x
+
+list = `constant` A (`constant` B (`constant` C (`constant` D `thedefault`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+heador thedefault list = foldr constant thedefault list
+heador thedefault = foldr constant thedefault
+heador = foldr constant
+\end{lstlisting}
+\end{frame}
+
+%
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{right folds replace constructors}
+Let's sequence a list of effects \lstinline{(f a)} and produce an effect (f) of list
+
+\lstinline{:: Monad f => List (f a) -> f (List a)}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = Cons A (Cons B (Cons C (Cons D Nil)))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
+Supposing 
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
+\begin{itemize}
+\item let \lstinline[mathescape]{`Cons` = $\a b -> do { x <- a; y <- b; return (Cons a b)}$}
+\item let \lstinline{`Nil`  = return Nil}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
+Supposing
+\begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
+lift2cons a b = $do { x <- a; y <- b; return (Cons a b)}$
+
+list = `lift2cons` A (`lift2cons` B (`lift2cons` C (`lift2cons` D `return Nil`)))
+\end{lstlisting}
+\end{block}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+sequence list = foldr (lift2cons) (return Nil) list
+sequence = foldr (lift2cons) (return Nil)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldr}
+\begin{block}{Observations}
+\begin{itemize}
+\item \lstinline[basicstyle=\ttfamily]$foldr$ may work on an infinite list.
+  \begin{itemize}
+  \item There is no \emph{order} specified, however, there is associativity.
+  \item Depends on the strictness of the given function.
+  \item Replaces the \lstinline[basicstyle=\ttfamily]$Nil$ constructor \emph{if it ever comes to exist}.
+  \end{itemize}
+\item The expression \lstinline[basicstyle=\ttfamily]$foldr Cons Nil$ leaves the list \emph{unchanged}.
+  \begin{itemize}
+  \item In other words, passing the list constructors to \lstinline[basicstyle=\ttfamily]$foldr$ produces an \emph{identity} function.
+  \item A function that produces an identity, given constructors for a data type, is called its \emph{catamorphism}.
+  \item \lstinline[basicstyle=\ttfamily]$foldr$ is the list catamorphism.
+  \end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
