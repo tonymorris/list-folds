@@ -11,7 +11,7 @@ to get back a value of the type \lstinline[basicstyle=\ttfamily]$b$.
 \hrulefill
 
 \lstinline[basicstyle=\ttfamily]$foldr :: (a -> b -> b) -> b -> List a -> b$
-\lstinline[basicstyle=\ttfamily]$B foldRight<A, B>(Func<A, B, B>, B, List<A>)$
+\lstinline[basicstyle=\ttfamily]$B FoldRight<A, B>(Func<A, B, B>, B, List<A>)$
 \end{frame}
 
 \begin{frame}
@@ -31,7 +31,7 @@ The \lstinline[basicstyle=\ttfamily]$foldr$ function performs \textbf{constructo
 The expression \lstinline[basicstyle=\ttfamily]$foldr f z list$ replaces in \lstinline[basicstyle=\ttfamily]$list$:
 \begin{itemize}
 \item Every occurrence of \lstinline{Cons} \lstinline[basicstyle=\ttfamily]$(:)$ with \lstinline[basicstyle=\ttfamily]$f$.
-\item Any occurrence of \lstinline{Nil} \lstinline[basicstyle=\ttfamily]$[]$ with \lstinline[basicstyle=\ttfamily]$z$\footnote{The nil constructor may be absent \textemdash an infinite list}.
+\item Any occurrence of \lstinline{Nil} \lstinline[basicstyle=\ttfamily]$[]$ with \lstinline[basicstyle=\ttfamily]$z$\footnote{The \lstinline{Nil} constructor may be absent \textemdash an infinite list}.
 \end{itemize}
 \end{frame}
 
@@ -497,7 +497,8 @@ list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
 \frametitle{foldr}
 \begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
 \begin{itemize}
-\item let \lstinline[mathescape]{`Cons` = $\a b -> do { x <- a; y <- b; return (Cons a b)}$}
+\item let \lstinline[mathescape]{`Cons` = \a b -> do $\texttt{\{}$ x <- a; y <- b; return (Cons a b) $\texttt{\}}$ }
+% \item let \lstinline[mathescape]{`Cons` = \a b -> do x <- a; y <- b; return (Cons a b) $}
 \item let \lstinline{`Nil`  = return Nil}
 \end{itemize}
 \end{block}
@@ -508,7 +509,7 @@ list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
 \begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
 Supposing
 \begin{lstlisting}[style=haskell,basicstyle=\tiny\ttfamily,mathescape]
-lift2cons a b = $do { x <- a; y <- b; return (Cons a b)}$
+lift2cons a b = do { x <- a; y <- b; return (Cons a b)}
 
 list = `lift2cons` A (`lift2cons` B (`lift2cons` C (`lift2cons` D `return Nil`)))
 \end{lstlisting}
