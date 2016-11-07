@@ -84,6 +84,10 @@ Let's sum the integers of a list
   return r
 \end{lstlisting}
 \end{block}
+\begin{center}
+\LARGE
+\emph{Replace the values in the loop}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -124,15 +128,19 @@ Let's reverse a list
 \frametitle{foldl}
 \begin{block}{reverse a list}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-flipCons r a = Cons a r
-
 \list ->
   var r = `Nil`
   foreach(a in `list`)
     r = `flipCons`(r, a)
   return r
+
+flipCons r a = Cons a r
 \end{lstlisting}
 \end{block}
+\begin{center}
+\LARGE
+\emph{Replace the values in the loop}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -173,15 +181,19 @@ Let's compute the length of a list
 \frametitle{foldl}
 \begin{block}{length of a list}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-plus1 r a = r + 1
-
 \list ->
   var r = `0`
   foreach(a in `list`)
     r = `plus1`(r, a)
   return r
+
+plus1 r a = r + 1
 \end{lstlisting}
 \end{block}
+\begin{center}
+\LARGE
+\emph{Replace the values in the loop}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]
