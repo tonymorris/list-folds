@@ -391,7 +391,7 @@ list = `applyp` A (`applyp` B (`applyp` C (`applyp` D `Nil`)))
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
 filter p list = foldr (\x -> if p x then Cons x else id) Nil list
 filter p = foldr (\x -> if p x then Cons x else id) Nil
-filter p = foldr (bool id (Cons x) (p x)) Nil
+filter p = foldr (\x -> bool id (Cons x) (p x)) Nil
 filter p = foldr (bool id . Cons <*> p) Nil
 \end{lstlisting}
 \end{frame}
