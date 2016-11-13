@@ -497,8 +497,7 @@ list = `Cons` A (`Cons` B (`Cons` C (`Cons` D `Nil`)))
 \frametitle{foldr}
 \begin{block}{list of effects \lstinline{(f a)} to effect (f) of list}
 \begin{itemize}
-\item let \lstinline[mathescape]{`Cons` = \a b -> do $\texttt{\{}$ x <- a; y <- b; return (Cons a b) $\texttt{\}}$ }
-% \item let \lstinline[mathescape]{`Cons` = \a b -> do x <- a; y <- b; return (Cons a b) $}
+\item let \lstinline[mathescape]{`Cons` = \a b -> do $\texttt{\{}$ x <- a; y <- b; return (Cons x y) $\texttt{\}}$ }
 \item let \lstinline{`Nil`  = return Nil}
 \end{itemize}
 \end{block}
