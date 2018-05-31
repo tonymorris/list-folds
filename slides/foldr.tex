@@ -31,7 +31,7 @@ The \lstinline[basicstyle=\ttfamily]$foldr$ function performs \textbf{constructo
 The expression \lstinline[basicstyle=\ttfamily]$foldr f z list$ replaces in \lstinline[basicstyle=\ttfamily]$list$:
 \begin{itemize}
 \item Every occurrence of \lstinline{Cons} \lstinline[basicstyle=\ttfamily]$(:)$ with \lstinline[basicstyle=\ttfamily]$f$.
-\item Any occurrence of \lstinline{Nil} \lstinline[basicstyle=\ttfamily]$[]$ with \lstinline[basicstyle=\ttfamily]$z$\footnote{The \lstinline{Nil} constructor may be absent \textemdash an infinite list}.
+\item Any occurrence of \lstinline{Nil} \lstinline[basicstyle=\ttfamily]$[]$ with \lstinline[basicstyle=\ttfamily]$z$\footnote{The \lstinline{Nil} constructor may be absent \textemdash i.e. the list is an infinite list of \lstinline{Cons}}.
 \end{itemize}
 \end{frame}
 

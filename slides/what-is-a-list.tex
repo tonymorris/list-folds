@@ -16,6 +16,17 @@ What, exactly is a list?
 \emph{And \textbf{never, ever} anything else}
 \end{frame}
 
+\begin{frame}
+\frametitle{Lists}
+\begin{block}{the shape of a list's construction is}
+\begin{itemize}
+\item \lstinline{Nil  :: List a}
+\item \lstinline{Cons :: a -> List a -> List a}
+\end{itemize}
+\end{block}
+\emph{And \textbf{never, ever} anything else}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Lists}
 \begin{block}{a list using C\#}
@@ -25,7 +36,7 @@ class Nil<A> : List<A> {}
 class Cons<A> : List<A> { A head; List<A> tail; }
 \end{lstlisting}
 \end{block}
-\tiny{\emph{And some tricks to enforce \textbf{never ever anything else}}}
+\tiny{\emph{And some tricks (omitted) to enforce \textbf{never ever anything else}}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -50,6 +61,11 @@ new Cons<int>(12, new Nil<int>())
 Cons 12 Nil
 \end{lstlisting}
 \end{block}
+\begin{block}{printed}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+[12]
+\end{lstlisting}
+\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -64,6 +80,11 @@ new Cons<char>('a', new Cons<char>('b', new Cons<char>('c', new Nil<char>())))
 Cons 'a' (Cons 'b' (Cons 'c' Nil))
 \end{lstlisting}
 \end{block}
+\begin{block}{printed}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+['a', 'b', 'c']
+\end{lstlisting}
+\end{block}
 \end{frame}
 
 \begin{frame}
@@ -71,7 +92,7 @@ Cons 'a' (Cons 'b' (Cons 'c' Nil))
 \begin{block}{Naming Schmaming}
 \begin{itemize}
 \item<1-> Sometimes you will see \lstinline{Nil} denoted \lstinline{[]}
-\item<2-> and/or \lstinline{Cons} denoted \lstinline{:} or \lstinline{::} in an infix position
+\item<2-> and/or \lstinline{Cons} denoted \lstinline{:} in an infix position
 \item<3-> like this \lstinline{1:(2:(3:[]))}
 \item<4-> but this is the same data structure
 \end{itemize}

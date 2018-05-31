@@ -51,6 +51,14 @@ How does \lstinline[basicstyle=\ttfamily]$foldl$ take three values to that retur
 
 \begin{frame}[fragile]
 \frametitle{foldl}
+\begin{block}{refactor some loops}
+\emph{let's look at a real code example}
+\end{block}
+\tiny{\emph{switch to code example}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
 \begin{block}{all left folds are loops}
 Let's sum the integers of a list
 \end{block}
@@ -96,6 +104,50 @@ Let's sum the integers of a list
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
 sum list = foldl (\r a -> (+) r a) 0 list
 sum = foldl (+) 0
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{multiply the integers of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\f z list ->
+  var r = `z`
+  foreach(a in `list`)
+    r = `f`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{multiply the integers of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\list ->
+  var r = `0`
+  foreach(a in `list`)
+    r = `*`(r, a)
+  return r
+\end{lstlisting}
+\end{block}
+\begin{center}
+\LARGE
+\emph{Replace the values in the loop}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{foldl}
+\begin{block}{multiply the integers of a list}
+\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+product list = foldl (\r a -> (*) r a) 0 list
+product = foldl (*) 0
 \end{lstlisting}
 \end{block}
 \end{frame}
