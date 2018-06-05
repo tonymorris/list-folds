@@ -186,7 +186,7 @@ Let's reverse a list
     r = `flipCons`(r, a)
   return r
 
-flipCons r a = Cons a r
+flipCons = \r a -> Cons a r
 \end{lstlisting}
 \end{block}
 \begin{center}
@@ -239,7 +239,7 @@ Let's compute the length of a list
     r = `plus1`(r, a)
   return r
 
-plus1 r a = r + 1
+plus1 = \r a -> r + 1
 \end{lstlisting}
 \end{block}
 \begin{center}

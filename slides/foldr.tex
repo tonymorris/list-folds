@@ -523,17 +523,15 @@ sequence = foldr (lift2cons) (return Nil)
 \frametitle{foldr}
 \begin{block}{Observations}
 \begin{itemize}
-\item \lstinline[basicstyle=\ttfamily]$foldr$ may work on an infinite list.
+\item<1-> \lstinline[basicstyle=\ttfamily]$foldr$ may work on an infinite list.
   \begin{itemize}
   \item There is no \emph{order} specified, however, there is associativity.
   \item Depends on the strictness of the given function.
   \item Replaces the \lstinline[basicstyle=\ttfamily]$Nil$ constructor \emph{if it ever comes to exist}.
   \end{itemize}
-\item The expression \lstinline[basicstyle=\ttfamily]$foldr Cons Nil$ leaves the list \emph{unchanged}.
+\item<2-> The expression \lstinline[basicstyle=\ttfamily]$foldr Cons Nil$ leaves the list \emph{unchanged}.
   \begin{itemize}
   \item In other words, passing the list constructors to \lstinline[basicstyle=\ttfamily]$foldr$ produces an \emph{identity} function.
-  \item A function that produces an identity, given constructors for a data type, is called its \emph{catamorphism}.
-  \item \lstinline[basicstyle=\ttfamily]$foldr$ is the list catamorphism.
   \end{itemize}
 \end{itemize}
 \end{block}
