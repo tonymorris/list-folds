@@ -130,7 +130,7 @@ sum = foldl (+) 0
 \begin{block}{multiply the integers of a list}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
 \list ->
-  var r = `0`
+  var r = `1`
   foreach(a in `list`)
     r = `*`(r, a)
   return r
@@ -146,8 +146,8 @@ sum = foldl (+) 0
 \frametitle{foldl}
 \begin{block}{multiply the integers of a list}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-product list = foldl (\r a -> (*) r a) 0 list
-product = foldl (*) 0
+product list = foldl (\r a -> (*) r a) 1 list
+product = foldl (*) 1
 \end{lstlisting}
 \end{block}
 \end{frame}
