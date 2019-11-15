@@ -1,8 +1,8 @@
 \begin{frame}
 \frametitle{Lists}
-\begin{block}{What is a list?}
+\begin{center}
 What, exactly is a list?
-\end{block}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -18,7 +18,7 @@ What, exactly is a list?
 
 \begin{frame}
 \frametitle{Lists}
-\begin{block}{the shape of a list's construction is}
+\begin{block}{A List that holds elements of type \lstinline{a} is constructed by either:}
 \begin{itemize}
 \item \lstinline{Nil  :: List a}
 \item \lstinline{Cons :: a -> List a -> List a}
@@ -28,33 +28,15 @@ What, exactly is a list?
 
 \begin{frame}[fragile]
 \frametitle{Lists}
-\begin{block}{a list using C\#}
-\begin{lstlisting}[style=csharp,basicstyle=\scriptsize\ttfamily,mathescape]
-interface List<A>{}
-class Nil<A> : List<A> {}
-class Cons<A> : List<A> { A head; List<A> tail; }
-\end{lstlisting}
-\end{block}
-\tiny{\emph{And some tricks (omitted) to enforce \textbf{never ever anything else}}}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Lists}
-\begin{block}{a list using Haskell}
+\begin{block}{a list declaration using Haskell}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
 data List a = Nil | Cons a (List a)
 \end{lstlisting}
 \end{block}
-\tiny{\emph{\textbf{never ever anything else} is enforced in haskell}}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Some examples of Lists}
-\begin{block}{C\#}
-\begin{lstlisting}[style=csharp,basicstyle=\scriptsize\ttfamily,mathescape]
-new Cons<int>(12, new Nil<int>())
-\end{lstlisting}
-\end{block}
 \begin{block}{Haskell}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
 Cons 12 Nil
@@ -69,11 +51,6 @@ Cons 12 Nil
 
 \begin{frame}[fragile]
 \frametitle{Some examples of Lists}
-\begin{block}{C\#}
-\begin{lstlisting}[style=csharp,basicstyle=\tiny\ttfamily,mathescape]
-new Cons<char>('a', new Cons<char>('b', new Cons<char>('c', new Nil<char>())))
-\end{lstlisting}
-\end{block}
 \begin{block}{Haskell}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
 Cons 'a' (Cons 'b' (Cons 'c' Nil))
@@ -88,19 +65,12 @@ Cons 'a' (Cons 'b' (Cons 'c' Nil))
 
 \begin{frame}
 \frametitle{Some nomenclature}
-\begin{block}{Naming Schmaming}
+\begin{block}{Naming conventions}
 \begin{itemize}
 \item<1-> Sometimes you will see \lstinline{Nil} denoted \lstinline{[]}
-\item<2-> and/or \lstinline{Cons} denoted \lstinline{:} in an infix position
+\item<2-> and \lstinline{Cons} denoted \lstinline{:} whic used in infix position
 \item<3-> like this \lstinline{1:(2:(3:[]))}
 \item<4-> but this is the same data structure
 \end{itemize}
 \end{block}
-\end{frame}
-
-\begin{frame}
-\frametitle{Lists}
-\begin{center}
-Ensure we all know what a list is
-\end{center}
 \end{frame}
