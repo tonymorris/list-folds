@@ -2,15 +2,15 @@
 \frametitle{foldl}
 The \lstinline[basicstyle=\ttfamily]$foldl$ function accepts three values:
 \begin{enumerate}
-\item \lstinline[basicstyle=\ttfamily]$f :: b -> a -> b$
-\item \lstinline[basicstyle=\ttfamily]$z :: b$
-\item \lstinline[basicstyle=\ttfamily]$list :: List a$
+\item \lstinline[basicstyle=\ttfamily]$f :: B => A => B$
+\item \lstinline[basicstyle=\ttfamily]$z :: B$
+\item \lstinline[basicstyle=\ttfamily]$list :: List[A]$
 \end{enumerate}
-to get back a value of the type \lstinline[basicstyle=\ttfamily]$b$.
+to get back a value of the type \lstinline[basicstyle=\ttfamily]$B$.
 
 \hrulefill
 
-\lstinline[basicstyle=\ttfamily]$foldl :: (b -> a -> b) -> b -> List a -> b$
+\lstinline[basicstyle=\ttfamily]$foldLeft :: (B => A => B) => B => List[A] => B$
 \lstinline[basicstyle=\ttfamily]$B FoldLeft<A, B>(Func<B, A, B>, B, List<A>)$
 \end{frame}
 
@@ -27,7 +27,7 @@ How does \lstinline[basicstyle=\ttfamily]$foldl$ take three values to that retur
 \frametitle{foldl}
 \begin{block}{all left folds are loops}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-\f z list ->
+(f, z, list) =>
   var r = z
   foreach(a in list)
     r = f(r, a)
@@ -40,7 +40,7 @@ How does \lstinline[basicstyle=\ttfamily]$foldl$ take three values to that retur
 \frametitle{foldl}
 \begin{block}{all left folds are loops}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-\f z list ->
+(f, z, list) =>
   var r = `z`
   foreach(a in `list`)
     r = `f`(r, a)
@@ -67,7 +67,7 @@ Let's sum the integers of a list
 \frametitle{foldl}
 \begin{block}{sum the integers of a list}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-\f z list ->
+(f, z, list) =>
   var r = `z`
   foreach(a in `list`)
     r = `f`(r, a)
@@ -84,7 +84,7 @@ Let's sum the integers of a list
 \frametitle{foldl}
 \begin{block}{sum the integers of a list}
 \begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-\list ->
+list =>
   var r = `0`
   foreach(a in `list`)
     r = `+`(r, a)

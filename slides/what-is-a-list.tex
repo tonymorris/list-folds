@@ -19,31 +19,33 @@ What, exactly is a list?
 \begin{frame}
 \frametitle{Lists}
 \begin{block}{A List that holds elements of type \lstinline{a} is constructed by either:}
-\begin{itemize}
-\item \lstinline{Nil  :: List a}
-\item \lstinline{Cons :: a -> List a -> List a}
-\end{itemize}
+  \begin{itemize}
+  \item \lstinline{Nil: List[A]}
+  \item \lstinline{Cons: A => List[A] => List[A]}
+  \end{itemize}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Lists}
-\begin{block}{a list declaration using Haskell}
-\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-data List a = Nil | Cons a (List a)
+\begin{block}{a list declaration using Scala}
+\begin{lstlisting}[style=scala,basicstyle=\scriptsize\ttfamily,mathescape]
+sealed trait List[A]
+case class Nil[A]() extends List[A]
+case class Cons[A](h: A, t: List[A])
 \end{lstlisting}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Some examples of Lists}
-\begin{block}{Haskell}
-\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-Cons 12 Nil
+\begin{block}{Scala}
+\begin{lstlisting}[style=scala,basicstyle=\scriptsize\ttfamily,mathescape]
+Cons(12, Nil)
 \end{lstlisting}
 \end{block}
 \begin{block}{printed}
-\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\begin{lstlisting}[style=scala,basicstyle=\scriptsize\ttfamily,mathescape]
 [12]
 \end{lstlisting}
 \end{block}
@@ -51,13 +53,13 @@ Cons 12 Nil
 
 \begin{frame}[fragile]
 \frametitle{Some examples of Lists}
-\begin{block}{Haskell}
-\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
-Cons 'a' (Cons 'b' (Cons 'c' Nil))
+\begin{block}{Scala}
+\begin{lstlisting}[style=scala,basicstyle=\scriptsize\ttfamily,mathescape]
+Cons('a', Cons('b', Cons('c', Nil)))
 \end{lstlisting}
 \end{block}
 \begin{block}{printed}
-\begin{lstlisting}[style=haskell,basicstyle=\scriptsize\ttfamily,mathescape]
+\begin{lstlisting}[style=scala,basicstyle=\scriptsize\ttfamily,mathescape]
 ['a', 'b', 'c']
 \end{lstlisting}
 \end{block}
